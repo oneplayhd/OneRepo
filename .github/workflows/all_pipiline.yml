@@ -1,4 +1,4 @@
-name: OneRepo Full Pipeline
+name: All Full Pipeline
 
 on:
   push:
