@@ -24,7 +24,7 @@ jobs:
 
       - name: Generate addons.xml and md5
         run: |
-          python generate_addons_xml_md5.py
+          python generate_addons.py
 
       - name: Commit and push if changed
         run: |
