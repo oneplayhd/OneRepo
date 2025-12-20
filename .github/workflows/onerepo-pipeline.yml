@@ -1,0 +1,61 @@
+name: OneRepo Full Pipeline
+
+on:
+  push:
+    paths:
+      - "*.zip"
+      - "**/*.zip"
+      - "**/addon.xml"
+      - "*.py"
+      - "**/*.py"
+  workflow_dispatch:
+
+# garante execução um por vez
+concurrency:
+  group: onerepo-pipeline
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      # 1️⃣ Processa todos os ZIPs
+      - name: Process addon ZIPs
+        run: |
+          python generate_zip.py
+
+      # 2️⃣ Gera addons.xml + md5
+      - name: Generate addons.xml and md5
+        run: |
+          python generate_addons.py
+
+      # 3️⃣ Gera index.html
+      - name: Generate index.html
+        run: |
+          python generate_index.py
+
+      # 4️⃣ Commit ÚNICO
+      - name: Commit changes if any
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+
+            git add -A
+            git commit -m "chore: automatic repository update"
+            git pull --rebase origin master
+            git push origin master
+          else
+            echo "No changes to commit"
+          fi
