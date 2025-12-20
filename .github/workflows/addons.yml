@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - '**/addon.xml'
-      - 'generate_addons_xml_md5.py'
+      - 'generate_addons.py'
   workflow_dispatch:
 
 jobs:
