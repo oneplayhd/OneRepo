@@ -1,14 +1,29 @@
 <!DOCTYPE html>
-<html><head>
-<meta charset="utf-8">
+<html lang='pt-BR'>
+<head>
+<meta charset='utf-8'>
 <title>Directory listing</title>
+<style>
+        body{font-family:Arial;background:#f9f9f9;padding:20px}
+        pre{background:#fff;padding:10px;border-radius:8px}
+        a{text-decoration:none;color:#0066cc}
+        #search{padding:6px;width:300px;margin-bottom:12px}
+        </style>
 </head><body>
-<h1>Directory listing</h1><hr/><pre>
-<a href="./One.repo/index.html">One.repo/</a>
-<a href="./plugin.video.BrazucaPlay.Matrix/index.html">plugin.video.BrazucaPlay.Matrix/</a>
-</pre></body></html>
+<h1>Directory listing</h1><hr/>
+<input id="search" placeholder="Pesquisar...">
+<pre id='listing'>
+📁 <a href="One.repo/index.html">One.repo/</a>
+📁 <a href="plugin.video.BrazucaPlay.Matrix/index.html">plugin.video.BrazucaPlay.Matrix/</a>
+</pre>
+<script>
+const items = [["one.repo","\ud83d\udcc1 <a href=\"One.repo\/index.html\">One.repo\/<\/a>"],["plugin.video.brazucaplay.matrix","\ud83d\udcc1 <a href=\"plugin.video.BrazucaPlay.Matrix\/index.html\">plugin.video.BrazucaPlay.Matrix\/<\/a>"]];
+const s=document.getElementById('search');
+const l=document.getElementById('listing');
+const n=t=>t.normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase();
+s.oninput=()=>{const t=n(s.value);l.innerHTML=items.filter(i=>i[0].includes(t)).map(i=>i[1]).join('\n');};
+</script>
+</body></html>
 
-<!-- REPOSITORIO KODI (FORA DO HTML) -->
-<div id="Repositorio-KODI" style="display:none"><table>
-<tr><td><a href="One.repo/One.repo-1.15.zip">One.repo/One.repo-1.15.zip</a></td></tr>
-</table></div>
+<!-- KODI (FORA DO HTML) -->
+<div style="display:none"><table><tr><td><a href="n">n</a></td></tr></table></div>
