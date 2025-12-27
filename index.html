@@ -24,6 +24,3 @@ const n=t=>t.normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase();
 s.oninput=()=>{const t=n(s.value);l.innerHTML=items.filter(i=>i[0].includes(t)).map(i=>i[1]).join('\n');};
 </script>
 </body></html>
-
-<!-- KODI (FORA DO HTML) -->
-<div style="display:none"><table><tr><td><a href="n">n</a></td></tr></table></div>
